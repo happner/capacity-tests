@@ -1,21 +1,21 @@
 const startle = require('startle');
 
-module.exports.start = (context, config) => {
+module.exports.before = (vars, config) => {
 
   before('start agent', async function () {
     this.timeout(0);
     const { connections, defaults } = config.startle;
-    context.agent = await startle.createAgent(connections, defaults);
+    vars.agent = await startle.createAgent(connections, defaults);
   });
 
 }
 
-module.exports.stop = context => {
+module.exports.after = vars => {
 
   after('stop agent', async function () {
-    if (!context.agent) return;
+    if (!vars.agent) return;
     this.timeout(0);
-    await context.agent.destroy();
+    await vars.agent.destroy();
   });
 
 }

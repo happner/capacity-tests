@@ -21,22 +21,48 @@ const filename = path.basename(__filename);
 const { EventEmitter } = require('events');
 const config = require('../config');
 const hooks = require('./lib/hooks');
+const testId = parseInt(filename.split('-').shift());
 
 describe(filename, function () {
 
-  var context = {};
+  var vars = {};
 
-  hooks.agent.start(context, config);
+  hooks.agent.before(vars, config);
 
-  hooks.metrics.start(context, config);
+  hooks.metrics.before(vars, config);
 
-  hooks.metrics.stop(context);
+  hooks.mongodb.before(vars, config);
 
-  hooks.agent.stop(context);
+  hooks.users.before(vars, config);
 
-  it('xxx', function (done) {
+  hooks.metrics.after(vars);
 
-    setTimeout(done, 500);
+  hooks.agent.after(vars);
+
+  config.tests[testId].clusterSizes.forEach(clusterSize => {
+
+    context('With cluster size ' + clusterSize, function () {
+
+      hooks.servers.beforeEach(vars, config, {
+        clusterSize: clusterSize,
+        testId: testId
+      });
+
+      hooks.clients.beforeEach(vars, config, {
+        testId: testId
+      });
+
+      hooks.clients.afterEach(vars);
+
+      hooks.servers.afterEach(vars);
+
+      it('xxx', function (done) {
+
+        setTimeout(done, 100);
+
+      });
+
+    });
 
   });
 
