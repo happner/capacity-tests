@@ -1,0 +1,28 @@
+{
+  "name": "happner-cluster-capacity-tests",
+  "version": "1.0.0",
+  "description": "Distributed capacity tests for HappnerCluster",
+  "engines": {
+    "node": ">=8"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happner/happner-cluster-capacity-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/happner/happner-cluster-capacity-tests/issues"
+  },
+  "homepage": "https://github.com/happner/happner-cluster-capacity-tests#readme",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "netrix": "^2.0.0",
+    "startle": "^1.0.0"
+  }
+}
