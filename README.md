@@ -2,6 +2,8 @@
 
 Distributed capacity tests for HappnerCluster.
 
+A work in progress.
+
 * Uses [startle](https://github.com/nomilous/startle) to distribute the server and client processes across multiple hosts.
 * Uses [netrix](https://github.com/nomilous/netrix) to accumulate runtime metrics.
 * Uses ES6 features. Requires node >=8
@@ -17,4 +19,3 @@ node_modules/.bin/startle run-server -p . -t XXX -g metrics -P 50003 -d
 ```
 
 2. Copy  `exampleConfig.js` to `config.js`.
-
