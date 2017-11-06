@@ -1,14 +1,14 @@
-module.exports.beforeEach = (vars, config, test) => {
+module.exports.before = (vars, config, test) => {
 
-  beforeEach('start clients', function () {
+  before('start clients', function () {
     // TOdO
   });
 
 }
 
-module.exports.afterEach = vars => {
+module.exports.after = vars => {
 
-  afterEach('stop clients', function () {
+  after('stop clients', function () {
     // TOdO
   });
 
