@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/happner/happner-cluster-capacity-tests#readme",
   "devDependencies": {
+    "happn-service-mongo-2": "^1.2.0",
+    "happner-cluster": "^3.0.1",
     "mocha": "^4.0.1",
+    "mongodb": "^2.2.33",
     "netrix": "^2.0.0",
     "startle": "^1.0.0"
   }

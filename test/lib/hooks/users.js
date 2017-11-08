@@ -1,7 +1,7 @@
-module.exports.before = (vars, config) => {
+module.exports.before = (vars, config, test) => {
 
-  before('create users', function () {
-    // TODO
+  before('create users', async function () {
+    // need?
   });
 
 }

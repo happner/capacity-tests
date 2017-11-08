@@ -33,7 +33,9 @@ describe(filename, function () {
 
   hooks.mongodb.before(vars, config);
 
-  hooks.users.before(vars, config);
+  // hooks.users.before(vars, config, {
+  //   testId: testId
+  // });
 
   hooks.metrics.after(vars);
 
@@ -41,20 +43,20 @@ describe(filename, function () {
 
   config.tests[testId].clusterSizes.forEach(clusterSize => {
 
-    context('With cluster size ' + clusterSize, function () {
+    context('with cluster size ' + clusterSize, function () {
 
-      hooks.servers.beforeEach(vars, config, {
+      hooks.servers.before(vars, config, {
         clusterSize: clusterSize,
         testId: testId
       });
 
-      hooks.clients.beforeEach(vars, config, {
+      hooks.clients.before(vars, config, {
         testId: testId
       });
 
-      hooks.clients.afterEach(vars);
+      hooks.clients.after(vars);
 
-      hooks.servers.afterEach(vars);
+      hooks.servers.after(vars);
 
       it('xxx', function (done) {
 
