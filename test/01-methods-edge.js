@@ -20,7 +20,7 @@ const path = require('path');
 const filename = path.basename(__filename);
 const { EventEmitter } = require('events');
 const config = require('../config');
-const hooks = require('./lib/hooks');
+const hooks = require('../lib/hooks');
 const testId = filename.split('-').shift();
 
 describe(filename, function () {
@@ -30,10 +30,6 @@ describe(filename, function () {
   hooks.agent.before(ctx, config);
 
   hooks.metrics.before(ctx, config);
-
-  // hooks.users.before(ctx, config, {
-  //   testId: testId
-  // });
 
   hooks.metrics.after(ctx);
 
