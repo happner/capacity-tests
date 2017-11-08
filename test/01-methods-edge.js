@@ -21,46 +21,49 @@ const filename = path.basename(__filename);
 const { EventEmitter } = require('events');
 const config = require('../config');
 const hooks = require('./lib/hooks');
-const testId = parseInt(filename.split('-').shift());
+const testId = filename.split('-').shift();
 
 describe(filename, function () {
 
-  var vars = {};
+  var ctx = {};
 
-  hooks.agent.before(vars, config);
+  hooks.agent.before(ctx, config);
 
-  hooks.metrics.before(vars, config);
+  hooks.metrics.before(ctx, config);
 
-  hooks.mongodb.before(vars, config);
-
-  // hooks.users.before(vars, config, {
+  // hooks.users.before(ctx, config, {
   //   testId: testId
   // });
 
-  hooks.metrics.after(vars);
+  hooks.metrics.after(ctx);
 
-  hooks.agent.after(vars);
+  hooks.agent.after(ctx);
 
   config.tests[testId].clusterSizes.forEach(clusterSize => {
 
     context('with cluster size ' + clusterSize, function () {
 
-      hooks.servers.before(vars, config, {
+      hooks.mongodb.before(ctx, config);
+
+      hooks.servers.before(ctx, config, {
         clusterSize: clusterSize,
         testId: testId
       });
 
-      hooks.clients.before(vars, config, {
+      hooks.clients.before(ctx, config, {
         testId: testId
       });
 
-      hooks.clients.after(vars);
+      hooks.clients.after(ctx);
 
-      hooks.servers.after(vars);
+      hooks.servers.after(ctx);
 
       it('xxx', function (done) {
 
-        setTimeout(done, 100);
+        // this.timeout(0);
+        // setTimeout(done, 100000);
+
+        setTimeout(done, 1000);
 
       });
 

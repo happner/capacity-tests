@@ -1,24 +1,33 @@
-module.exports.before = (vars, config) => {
+const elasticsearch = require('../elasticsearch');
+
+module.exports.before = (ctx, config) => {
 
   before('start metrics server', async function () {
+    this.timeout(0);
     const { opts } = config.netrix;
-    vars.metricServer = await vars.agent.start({
+    ctx.metricServer = await ctx.agent.start({
       script: 'procs/metrics-server',
       group: 'metrics',
       timeout: 20 * 1000 // ample
     }, opts);
 
-    // vars.metricServer.on('flush', console.log);
+    ctx.metricServer.on('flush', (timestamp, metrics) => {
+      elasticsearch.store(
+        config.elasticsearch.url,
+        timestamp,
+        metrics
+      );
+    });
   });
 
 }
 
-module.exports.after = vars => {
+module.exports.after = ctx => {
 
   after('stop metrics server', async function () {
-    if (!vars.metricServer) return;
+    if (!ctx.metricServer) return;
     this.timeout(0);
-    await vars.metricServer.stop({
+    await ctx.metricServer.stop({
       timeout: 20 * 1000
     });
   });

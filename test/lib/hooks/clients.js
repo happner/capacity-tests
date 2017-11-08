@@ -1,4 +1,4 @@
-module.exports.before = (vars, config, test) => {
+module.exports.before = (ctx, config, test) => {
 
   before('start clients', function () {
     // TOdO
@@ -6,7 +6,7 @@ module.exports.before = (vars, config, test) => {
 
 }
 
-module.exports.after = vars => {
+module.exports.after = ctx => {
 
   after('stop clients', function () {
     // TOdO

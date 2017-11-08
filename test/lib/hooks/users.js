@@ -1,4 +1,4 @@
-module.exports.before = (vars, config, test) => {
+module.exports.before = (ctx, config, test) => {
 
   before('create users', async function () {
     // need?
