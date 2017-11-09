@@ -56,10 +56,8 @@ describe(filename, function () {
 
       it('xxx', function (done) {
 
-        // this.timeout(0);
-        // setTimeout(done, 100000);
-
-        setTimeout(done, 1000);
+        this.timeout(0);
+        setTimeout(done, 100000000);
 
       });
 

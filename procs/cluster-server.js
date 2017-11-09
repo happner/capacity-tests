@@ -3,7 +3,7 @@ const HappnerCluster = require('happner-cluster');
 
 var server;
 
-startle.onStart(async opts => {
+startle.onStart(async (opts, done) => {
   if (!opts.happn.services.membership.config.seed) {
     // give the seed server a head start because otherwise
     // all the servers race to create the admin users and

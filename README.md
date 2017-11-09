@@ -39,7 +39,7 @@ docker pull docker.elastic.co/kibana/kibana:5.6.3
 docker-compose up
 ```
 
-3. Uncomment `elasticsearch.url` in config.
+3. Uncomment `elasticsearch.url` in config (do not run tests until step 4 is done).
 4. Create index and type in elasticsearch (do this before sending in any data by running tests)
 
 ```
@@ -68,11 +68,27 @@ curl -H 'Content-Type: application/json' -X PUT -d '{
   }
 }' http://localhost:9200/cluster-capacity/_mapping/stats
 
+```
 
-// start over if any errors (byebye data too tho)
-curl -X DELETE localhost:9200/cluster-capacity
+5. [http://localhost:5601](http://localhost:5601)
+6. Set `cluster-capacity` as index pattern and `timestamp` as "time filter field"
+7. Create graphs in timelion/dashboard
+
+```
+// server count
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:server.count').lines(width=1.5).color('orange').label('Server Count')
+
+// client count
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:client.count').lines(width=1.5).color('green').label('Client Count')
+
+// methods per second
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.called').lines(width=1.5).color('green').label('Methods Called') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.handled').lines(width=1.5).color('blue').label('Methods Handled') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.replied').lines(width=1.5).color('red').label('Methods Replied')
+
+// methods duration miliseconds
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.inlag').lines(width=1.5).color('green').label('Request Lag')
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.outlag').lines(width=1.5).color('blue').label('Response Lag')
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.lag').lines(width=1.5).color('red').label('Total')
+
 
 ```
 
-3. set `cluster-capacity` as index pattern and `timestamp` as "time filter field" (possible because it was set to "date" in _mapping above).
-4. [http://localhost:5601](http://localhost:5601)
