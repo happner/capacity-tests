@@ -55,9 +55,30 @@ describe(filename, function () {
       hooks.servers.after(ctx);
 
       it('xxx', function (done) {
-
         this.timeout(0);
-        setTimeout(done, 100000000);
+
+        var interval = setInterval(() => {
+          ctx.clients.forEach(client => client.send('increment-activity'));
+        }, 1000);
+
+        var countLabouring = 0;
+        var activity = config.tests[testId].activity;
+        var saturationThreshold = activity.saturationThreshold;
+        var saturationConfirmThreshold = activity.saturationConfirmThreshold;
+
+        ctx.metricServer.on('flush', (timestamp, metrics) => {
+          var handled = metrics.gauges['methods.called'];
+          var replied = metrics.gauges['methods.replied'];
+          if (handled > (replied * saturationThreshold)) {
+            countLabouring++;
+          } else {
+            countLabouring = 0;
+          }
+          if (countLabouring > saturationConfirmThreshold) {
+            clearInterval(interval);
+            done();
+          }
+        });
 
       });
 

@@ -42,8 +42,13 @@ module.exports = {
       activity: {
         // each increment increases load by 2 actions per second
         incrementSize: 2,
+
         // start at 5 incrementSizes of load (5 * 2 actions per second)
-        startAt: 5
+        startAt: 5,
+
+        saturationThreshold: 1.25,
+        saturationConfirmThreshold: 10
+
       }
     }
   }
