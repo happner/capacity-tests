@@ -1,13 +1,10 @@
 module.exports = {
 
   startle: {
-    connections: [{
-      port: 50001
-    }, {
-      port: 50002
-    }, {
-      port: 50003
-    }],
+    connections: [
+      { port: 50001 },
+      { port: 50002 }
+    ],
     defaults: {
       token: 'XXX',
       rejectUnauthorized: false,
@@ -37,17 +34,17 @@ module.exports = {
   tests: {
     '01': {
       clusterSizes: [3],
-      clientCount: 1,
+      clientCount: 3,
 
       activity: {
         // each increment increases load by 2 actions per second
         incrementSize: 2,
 
-        // start at 5 incrementSizes of load (5 * 2 actions per second)
-        startAt: 5,
+        // start at 20 incrementSizes of load (20 * 2 actions per second)
+        startAt: 20,
 
-        saturationThreshold: 1.25,
-        saturationConfirmThreshold: 10
+        // saturationThreshold: 1.25,
+        // saturationConfirmThreshold: 10
 
       }
     }

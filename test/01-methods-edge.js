@@ -29,10 +29,6 @@ describe(filename, function () {
 
   hooks.agent.before(ctx, config);
 
-  hooks.metrics.before(ctx, config);
-
-  hooks.metrics.after(ctx);
-
   hooks.agent.after(ctx);
 
   config.tests[testId].clusterSizes.forEach(clusterSize => {
@@ -61,24 +57,24 @@ describe(filename, function () {
           ctx.clients.forEach(client => client.send('increment-activity'));
         }, 1000);
 
-        var countLabouring = 0;
-        var activity = config.tests[testId].activity;
-        var saturationThreshold = activity.saturationThreshold;
-        var saturationConfirmThreshold = activity.saturationConfirmThreshold;
-
-        ctx.metricServer.on('flush', (timestamp, metrics) => {
-          var handled = metrics.gauges['methods.called'];
-          var replied = metrics.gauges['methods.replied'];
-          if (handled > (replied * saturationThreshold)) {
-            countLabouring++;
-          } else {
-            countLabouring = 0;
-          }
-          if (countLabouring > saturationConfirmThreshold) {
-            clearInterval(interval);
-            done();
-          }
-        });
+        // var countLabouring = 0;
+        // var activity = config.tests[testId].activity;
+        // var saturationThreshold = activity.saturationThreshold;
+        // var saturationConfirmThreshold = activity.saturationConfirmThreshold;
+        // 
+        // ctx.metricServer.on('flush', (timestamp, metrics) => {
+        //   var handled = metrics.gauges['methods.called'];
+        //   var replied = metrics.gauges['methods.replied'];
+        //   if (handled > (replied * saturationThreshold)) {
+        //     countLabouring++;
+        //   } else {
+        //     countLabouring = 0;
+        //   }
+        //   if (countLabouring > saturationConfirmThreshold) {
+        //     clearInterval(interval);
+        //     done();
+        //   }
+        // });
 
       });
 

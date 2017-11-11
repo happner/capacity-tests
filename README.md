@@ -5,7 +5,6 @@ Distributed capacity tests for HappnerCluster.
 A work in progress.
 
 * Uses [startle](https://github.com/nomilous/startle) to distribute the server and client processes across multiple hosts.
-* Uses [netrix](https://github.com/nomilous/netrix) to accumulate runtime metrics.
 * Uses ES6 features. Requires node >=8
 
 ### To run locally.
@@ -15,7 +14,6 @@ A work in progress.
 ```
 node_modules/.bin/startle run-server -p . -t XXX -g clients -P 50001 -d
 node_modules/.bin/startle run-server -p . -t XXX -g servers -P 50002 -d
-node_modules/.bin/startle run-server -p . -t XXX -g metrics -P 50003 -d
 ```
 
 2. Copy  `exampleConfig.js` to `config.js`.
@@ -75,19 +73,22 @@ curl -H 'Content-Type: application/json' -X PUT -d '{
 7. Create graphs in timelion/dashboard
 
 ```
-// server count
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:server.count').lines(width=1.5).color('orange').label('Server Count')
+// Server Count
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:group.servers').lines(width=1.5).color('orange').label('Server Count')
 
-// client count
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:client.count').lines(width=1.5).color('green').label('Client Count')
+// Client Count
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:group.clients').lines(width=1.5).color('green').label('Client Count')
 
-// methods per second
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.called').lines(width=1.5).color('green').label('Methods Called') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.handled').lines(width=1.5).color('blue').label('Methods Handled') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.replied').lines(width=1.5).color('red').label('Methods Replied')
+// Methods Per Second
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_called').lines(width=1.5).color('green').label('Methods Called') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_handled').lines(width=1.5).color('blue').label('Methods Handled') .es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_replied').lines(width=1.5).color('red').label('Methods Replied')
 
-// methods duration miliseconds
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.inlag').lines(width=1.5).color('green').label('Request Lag')
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.outlag').lines(width=1.5).color('blue').label('Response Lag')
-.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods.lag').lines(width=1.5).color('red').label('Total')
+// Method Errors Per Second
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_errored').lines(width=1.5).color('red').label('Methods Errored')
+
+// Method Durations (ms)
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_requesttime').lines(width=1.5).color('green').label('Request Time')
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_replytime').lines(width=1.5).color('blue').label('Reply Time')
+.es(index=cluster-capacity, timefield='timestamp', metric='avg:methods_totaltime').lines(width=1.5).color('red').label('Total Time')
 
 
 ```

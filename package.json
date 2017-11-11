@@ -25,9 +25,8 @@
     "happner-cluster": "^3.0.1",
     "mocha": "^4.0.1",
     "mongodb": "^2.2.33",
-    "netrix": "^2.0.0",
     "randomstring": "^1.1.5",
     "request": "^2.83.0",
-    "startle": "^1.2.0"
+    "startle": "^1.3.2"
   }
 }
