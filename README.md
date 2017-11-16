@@ -37,7 +37,7 @@ docker pull docker.elastic.co/kibana/kibana:5.6.3
 docker-compose up
 ```
 
-3. Uncomment `elasticsearch.url` in config (do not run tests until step 4 is done).
+3. Uncomment `elasticsearch.url` in `config.js` (do not run tests until step 4 is done).
 4. Create index and type in elasticsearch (do this before sending in any data by running tests)
 
 ```
