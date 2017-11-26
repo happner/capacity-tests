@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const HappnerCluster = require('happner-cluster');
+
+HappnerCluster.create({
+    happn: {
+      services: {
+        membership: {
+          config: {
+            seed: true,
+            hosts: ['127.0.0.1:56000']
+          }
+        }
+      }
+    }
+  })
+
+  .then(function (server) {})
+
+  .catch(console.error);

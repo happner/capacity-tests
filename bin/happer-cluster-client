@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const {MeshClient} = require('happner-2');
+
+const client = new MeshClient();
+
+client.login()
+
+  .then(function () {
+    console.log('login ok');
+  })
+
+  .catch(console.error);

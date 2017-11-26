@@ -1,4 +1,4 @@
-# happner-cluster-capacity-tests
+# capacity-tests
 
 Distributed capacity tests for HappnerCluster.
 

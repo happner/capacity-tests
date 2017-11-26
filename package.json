@@ -1,5 +1,5 @@
 {
-  "name": "happner-cluster-capacity-tests",
+  "name": "capacity-tests",
   "version": "1.0.0",
   "description": "Distributed capacity tests for HappnerCluster",
   "engines": {
@@ -11,24 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/happner/happner-cluster-capacity-tests.git"
+    "url": "git+https://github.com/happner/luster-capacity-tests.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/happner/happner-cluster-capacity-tests/issues"
+    "url": "https://github.com/happner/capacity-tests/issues"
   },
-  "homepage": "https://github.com/happner/happner-cluster-capacity-tests#readme",
+  "homepage": "https://github.com/happner/capacity-tests#readme",
   "dependencies": {
-    "happn-cluster": "^4.0.0",
     "happn-service-mongo-2": "^1.2.0",
-    "happn-stats": "^1.0.5",
-    "happner-cluster": "^4.0.0-prerelease.5",
+    "happner-cluster": "^3.0.1",
     "mocha": "^4.0.1",
     "mongodb": "^2.2.33",
     "randomstring": "^1.1.5",
     "request": "^2.83.0",
-    "startle": "^1.3.2"
+    "startle": "^1.3.3"
   }
 }
