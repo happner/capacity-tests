@@ -22,6 +22,7 @@
   "homepage": "https://github.com/happner/capacity-tests#readme",
   "dependencies": {
     "happn-service-mongo-2": "^1.2.0",
+    "happner-2": "^5.2.1",
     "happner-cluster": "^3.0.1",
     "mocha": "^4.0.1",
     "mongodb": "^2.2.33",
