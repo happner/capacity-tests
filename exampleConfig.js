@@ -12,18 +12,15 @@ module.exports = {
     }
   },
 
-  netrix: {
-    opts: {
-      flushInterval: 2000
-    }
-  },
-
   happn: {
     adminPassword: 'xxx'
   },
 
   elasticsearch: {
-    // url: 'http://localhost:9200/cluster-capacity/stats'
+    // DEBUG=happn-stats* npm test
+    url: 'http://localhost:9200',
+    index: 'capacity-stats',
+    type: 'stats'
   },
 
   mongodb: {
@@ -38,14 +35,21 @@ module.exports = {
 
       activity: {
         // each increment increases load by 2 actions per second
-        incrementSize: 4,
+        incrementSize: 2,
 
         // start at 20 incrementSizes of load (20 * 2 actions per second)
-        startAt: 100,
+        startAt: 20,
 
         // saturationThreshold: 1.25,
         // saturationConfirmThreshold: 10
 
+      }
+    },
+    '02': {
+      clientCount: 5,
+      activity: {
+        incrementSize: 2,
+        startAt: 20
       }
     }
   }
