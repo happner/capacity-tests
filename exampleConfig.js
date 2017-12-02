@@ -30,9 +30,29 @@ module.exports = {
 
   tests: {
     '01': {
+      clientCount: 5,
+      activity: {
+        incrementSize: 2,
+        startAt: 20
+      }
+    },
+    '02': {
+      clientCount: 5,
+      activity: {
+        incrementSize: 2,
+        startAt: 20
+      }
+    },
+    '03': {
+      clientCount: 5,
+      activity: {
+        incrementSize: 2,
+        startAt: 20
+      }
+    },
+    '10': {
       clusterSizes: [1],
       clientCount: 1,
-
       activity: {
         // each increment increases load by 2 actions per second
         incrementSize: 2,
@@ -43,13 +63,6 @@ module.exports = {
         // saturationThreshold: 1.25,
         // saturationConfirmThreshold: 10
 
-      }
-    },
-    '02': {
-      clientCount: 5,
-      activity: {
-        incrementSize: 2,
-        startAt: 20
       }
     }
   }
