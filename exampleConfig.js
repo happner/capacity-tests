@@ -37,7 +37,7 @@ module.exports = {
       }
     },
     '02': {
-      clientCount: 5,
+      clientCount: 20,
       activity: {
         incrementSize: 2,
         startAt: 20

@@ -56,8 +56,8 @@ docker-compose up
 .es(index=capacity-stats, timefield='timestamp', metric='avg:ws_replytime').lines(width=1.5).color('blue').label('Reply Time')
 .es(index=capacity-stats, timefield='timestamp', metric='avg:ws_totaltime').lines(width=1.5).color('red').label('Total Time')
 
-// Test 01 - Ws requests waiting
-.es(index=capacity-stats, timefield='timestamp', metric='avg:ws_waiting').lines(width=1.5).color('green').label('Requests Waiting')
+// Test 01 - Ws awaiting reply
+.es(index=capacity-stats, timefield='timestamp', metric='avg:ws_waiting').lines(width=1.5).color('green').label('Awaiting Reply')
 
 
 
@@ -69,8 +69,8 @@ docker-compose up
 .es(index=capacity-stats, timefield='timestamp', metric='avg:uws_replytime').lines(width=1.5).color('blue').label('Reply Time')
 .es(index=capacity-stats, timefield='timestamp', metric='avg:uws_totaltime').lines(width=1.5).color('red').label('Total Time')
 
-// Test 02 - uws requests waiting
-.es(index=capacity-stats, timefield='timestamp', metric='avg:uws_waiting').lines(width=1.5).color('green').label('Requests Waiting')
+// Test 02 - uws awaiting reply
+.es(index=capacity-stats, timefield='timestamp', metric='avg:uws_waiting').lines(width=1.5).color('green').label('Awaiting Reply')
 
 
 
